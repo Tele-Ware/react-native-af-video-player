@@ -89,7 +89,7 @@ class Video extends Component {
   onLoad(data) {
     if (!this.state.loading) return
     this.props.onLoad(data)
-    const { height, width } = data.naturalSize
+    const { height, width } = data.naturalSize   
     const ratio = height === 'undefined' && width === 'undefined' ?
       (9 / 16) : (height / width)
     const inlineHeight = this.props.lockRatio ?
@@ -242,9 +242,9 @@ class Video extends Component {
           const initialOrient = Orientation.getInitialOrientation()
           const height = orientation !== initialOrient ?
             Win.width : Win.height
-          this.props.onFullScreen(this.state.fullScreen)
-          if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
-          this.animToFullscreen(height)
+            this.props.onFullScreen(this.state.fullScreen)
+            if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
+            this.animToFullscreen(height)
         } else {
           if (this.props.fullScreenOnly) {
             this.setState({ paused: true }, () => this.props.onPlay(!this.state.paused))
@@ -352,9 +352,7 @@ class Video extends Component {
       onMorePress,
       inlineOnly,
       playInBackground,
-      playWhenInactive,
-      controlDuration,
-      hideFullScreenControl
+      playWhenInactive
     } = this.props
 
     const inline = {
@@ -423,8 +421,6 @@ class Video extends Component {
           onMorePress={() => onMorePress()}
           theme={setTheme}
           inlineOnly={inlineOnly}
-          controlDuration={controlDuration}
-          hideFullScreenControl={hideFullScreenControl}
         />
       </Animated.View>
     )
@@ -456,7 +452,6 @@ Video.propTypes = {
   loop: PropTypes.bool,
   autoPlay: PropTypes.bool,
   inlineOnly: PropTypes.bool,
-  hideFullScreenControl: PropTypes.bool,
   fullScreenOnly: PropTypes.bool,
   playInBackground: PropTypes.bool,
   playWhenInactive: PropTypes.bool,
@@ -476,8 +471,7 @@ Video.propTypes = {
   logo: PropTypes.string,
   title: PropTypes.string,
   theme: PropTypes.object,
-  resizeMode: PropTypes.string,
-  controlDuration: PropTypes.number,
+  resizeMode: PropTypes.string
 }
 
 Video.defaultProps = {
@@ -506,8 +500,7 @@ Video.defaultProps = {
   logo: undefined,
   title: '',
   theme: defaultTheme,
-  resizeMode: 'contain',
-  controlDuration: 3,
+  resizeMode: 'contain'
 }
 
 export default Video
