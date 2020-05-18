@@ -1,57 +1,34 @@
 {
-  "_args": [
-    [
-      "react-native-af-video-player@0.2.1",
-      "F:\\Work\\7ader\\Mob_7ader\\Mob_7ader - New"
-    ]
-  ],
-  "_from": "react-native-af-video-player@0.2.1",
+  "_from": "react-native-af-video-player",
   "_id": "react-native-af-video-player@0.2.1",
   "_inBundle": false,
   "_integrity": "sha512-0+69zfk6nX9lFgfI+miHsUh1k32WouE53vWqyT2kHcAN4iDxa8mqcyMGeTnZ2gby62sx3T032OSbbAr1qRYZ6A==",
   "_location": "/react-native-af-video-player",
-  "_phantomChildren": {
-    "cliui": "3.2.0",
-    "decamelize": "1.2.0",
-    "is-stream": "1.1.0",
-    "keymirror": "0.1.1",
-    "lcid": "1.0.0",
-    "lodash": "4.17.15",
-    "lru-cache": "4.1.5",
-    "npm-run-path": "2.0.2",
-    "p-finally": "1.0.0",
-    "prop-types": "15.7.2",
-    "read-pkg-up": "2.0.0",
-    "require-directory": "2.1.1",
-    "set-blocking": "2.0.0",
-    "shebang-command": "1.2.0",
-    "signal-exit": "3.0.2",
-    "strip-eof": "1.0.0",
-    "which": "1.3.1",
-    "which-module": "2.0.0",
-    "y18n": "3.2.1"
-  },
+  "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "tag",
     "registry": true,
-    "raw": "react-native-af-video-player@0.2.1",
+    "raw": "react-native-af-video-player",
     "name": "react-native-af-video-player",
     "escapedName": "react-native-af-video-player",
-    "rawSpec": "0.2.1",
+    "rawSpec": "",
     "saveSpec": null,
-    "fetchSpec": "0.2.1"
+    "fetchSpec": "latest"
   },
   "_requiredBy": [
+    "#USER",
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/react-native-af-video-player/-/react-native-af-video-player-0.2.1.tgz",
-  "_spec": "0.2.1",
-  "_where": "F:\\Work\\7ader\\Mob_7ader\\Mob_7ader - New",
+  "_shasum": "35ae17a10b9cba8465fc6a856207de773d2df723",
+  "_spec": "react-native-af-video-player",
+  "_where": "D:\\New folder (2)",
   "author": {
     "name": "Abbas Farid",
     "email": "abbasfreestyle@gmail.com",
     "url": "https://github.com/abbasfreestyle"
   },
+  "bundleDependencies": false,
   "dependencies": {
     "react-native-keep-awake": "^2.0.6",
     "react-native-linear-gradient": "^2.3.0",
@@ -60,6 +37,7 @@
     "react-native-vector-icons": "^4.4.2",
     "react-native-video": "^2.0.0"
   },
+  "deprecated": false,
   "description": "A customisable React Native video player for Android and IOS",
   "devDependencies": {
     "babel-cli": "^6.26.0",

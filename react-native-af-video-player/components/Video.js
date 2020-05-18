@@ -11,11 +11,13 @@ import {
   Alert
 } from 'react-native'
 import VideoPlayer from 'react-native-video'
-import KeepAwake from 'react-native-keep-awake'
+// import KeepAwake from '../../react-native-keep-awake'
 import Orientation from 'react-native-orientation'
 import Icons from 'react-native-vector-icons/MaterialIcons'
 import { Controls } from './'
 import { checkSource } from './utils'
+import { Colors } from '../../../../src/Constants'
+
 const Win = Dimensions.get('window')
 const backgroundColor = '#000'
 
@@ -48,7 +50,7 @@ const defaultTheme = {
   seconds: '#FFF',
   duration: '#FFF',
   progress: '#FFF',
-  loading: '#FFF'
+  loading: Colors().NewApp.WhiteBackground
 }
 
 class Video extends Component {
@@ -89,9 +91,9 @@ class Video extends Component {
   onLoad(data) {
     if (!this.state.loading) return
     this.props.onLoad(data)
-    const { height, width } = data.naturalSize   
+    const { height, width } = data.naturalSize
     const ratio = height === 'undefined' && width === 'undefined' ?
-      (9 / 16) : (height / width)
+      (9 / 16) : (9 / 16)
     const inlineHeight = this.props.lockRatio ?
       (Win.width / this.props.lockRatio)
       : (Win.width * ratio)
@@ -104,7 +106,7 @@ class Video extends Component {
       Animated.timing(this.animInline, { toValue: inlineHeight, duration: 200 }).start()
       this.props.onPlay(!this.state.paused)
       if (!this.state.paused) {
-        KeepAwake.activate()
+        // KeepAwake.activate()
         if (this.props.fullScreenOnly) {
           this.setState({ fullScreen: true }, () => {
             this.props.onFullScreen(this.state.fullScreen)
@@ -227,9 +229,10 @@ class Video extends Component {
               if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
             })
           }
-          KeepAwake.activate()
+          // KeepAwake.activate()
         } else {
-          KeepAwake.deactivate()
+          // KeepAwake.deactivate()
+          return;
         }
       })
     })
@@ -242,9 +245,9 @@ class Video extends Component {
           const initialOrient = Orientation.getInitialOrientation()
           const height = orientation !== initialOrient ?
             Win.width : Win.height
-            this.props.onFullScreen(this.state.fullScreen)
-            if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
-            this.animToFullscreen(height)
+          this.props.onFullScreen(this.state.fullScreen)
+          if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
+          this.animToFullscreen(height)
         } else {
           if (this.props.fullScreenOnly) {
             this.setState({ paused: true }, () => this.props.onPlay(!this.state.paused))
@@ -288,7 +291,7 @@ class Video extends Component {
     const percent = seconds / this.state.duration
     if (seconds > this.state.duration) {
       throw new Error(`Current time (${seconds}) exceeded the duration ${this.state.duration}`)
-      return false
+
     }
     return this.onSeekRelease(percent)
   }
@@ -486,14 +489,14 @@ Video.defaultProps = {
   playWhenInactive: false,
   rotateToFullScreen: false,
   lockPortraitOnFsExit: false,
-  onEnd: () => {},
-  onLoad: () => {},
-  onPlay: () => {},
-  onError: () => {},
-  onProgress: () => {},
+  onEnd: () => { },
+  onLoad: () => { },
+  onPlay: () => { },
+  onError: () => { },
+  onProgress: () => { },
   onMorePress: undefined,
-  onFullScreen: () => {},
-  onTimedMetadata: () => {},
+  onFullScreen: () => { },
+  onTimedMetadata: () => { },
   rate: 1,
   volume: 1,
   lockRatio: undefined,

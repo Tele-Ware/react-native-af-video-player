@@ -218,7 +218,7 @@ class ReactNavigationExample extends Component {
           onFullScreen={status => this.onFullScreen(status)}
           fullScreenOnly
         />
-        <ScrollView>
+        <ScrollView alwaysBounceVertical={false}>
           <Text>Some content here...</Text>
         </ScrollView>
       </View>
@@ -260,7 +260,7 @@ Also having multiple videos in a ScrollView isn't perfect, so use at your own ri
 
     render() {
       return (
-        <ScrollView style={styles.container}>
+        <ScrollView alwaysBounceVertical={false} style={styles.container}>
 
           <Text>Some content above</Text>
 

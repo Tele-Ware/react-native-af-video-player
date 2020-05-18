@@ -1,4 +1,4 @@
-import React from 'react' // eslint-disable-line
+import React from 'react' 
 import PropTypes from 'prop-types'
 import {
   View,
@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Slider as RNSlider
 } from 'react-native'
-import Slider from 'react-native-slider'
+// import Slider from 'react-native-slider'
+import Slider from '../../../../node_modules/react-native-slider/src/Slider'
 
 const styles = StyleSheet.create({
   container: {

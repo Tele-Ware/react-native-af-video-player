@@ -1,7 +1,7 @@
-import Video from './components/Video'
+import Video from './react-native-af-video-player/components/Video'
 export {
   Container,
   ScrollView
-} from './components'
+} from './react-native-af-video-player/components'
 
 export default Video
