@@ -111,7 +111,7 @@ class Video extends Component {
           this.setState({ fullScreen: true }, () => {
             this.props.onFullScreen(this.state.fullScreen)
             this.animToFullscreen(Win.height)
-            if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
+            if (this.props.rotateToFullScreen) Orientation.lockToPortrait()
           })
         }
       }
@@ -197,7 +197,7 @@ class Video extends Component {
         if (this.props.fullScreenOnly && !this.state.paused) this.togglePlay()
         if (this.props.rotateToFullScreen) Orientation.lockToPortrait()
         setTimeout(() => {
-          if (!this.props.lockPortraitOnFsExit) Orientation.unlockAllOrientations()
+          if (!this.props.lockPortraitOnFsExit) Orientation.lockToPortrait()
         }, 1500)
       })
       return true
@@ -226,7 +226,7 @@ class Video extends Component {
               const height = orientation !== initialOrient ?
                 Win.width : Win.height
               this.animToFullscreen(height)
-              if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
+              if (this.props.rotateToFullScreen) Orientation.lockToPortrait()
             })
           }
           // KeepAwake.activate()
@@ -245,7 +245,7 @@ class Video extends Component {
           const initialOrient = Orientation.getInitialOrientation()
           const height = this.props.fullscreenHeight || Dimensions.get('window').height
           this.props.onFullScreen(this.state.fullScreen)
-          if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
+          if (this.props.rotateToFullScreen) Orientation.lockToPortrait()
           this.animToFullscreen(height)
         } else {
           if (this.props.fullScreenOnly) {
@@ -255,7 +255,7 @@ class Video extends Component {
           if (this.props.rotateToFullScreen) Orientation.lockToPortrait()
           this.animToInline()
           setTimeout(() => {
-            if (!this.props.lockPortraitOnFsExit) Orientation.unlockAllOrientations()
+            if (!this.props.lockPortraitOnFsExit) Orientation.lockToPortrait()
           }, 1500)
         }
       })
