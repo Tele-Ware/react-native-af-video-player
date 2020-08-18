@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
-import TouchableOpacity from '../../../../src/components/TouchableOpacity';
+import { TouchableOpacity } from '../../../../src/components';
 
 const backgroundColor = 'transparent';
 
@@ -42,4 +42,4 @@ PlayButton.propTypes = {
   theme: PropTypes.string.isRequired,
 };
 
-export {PlayButton};
+export { PlayButton };
