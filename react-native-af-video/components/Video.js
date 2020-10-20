@@ -366,7 +366,6 @@ class Video extends Component {
       ...defaultTheme,
       ...theme
     }
-
     return (
       <Animated.View
         style={[
@@ -410,6 +409,7 @@ class Video extends Component {
           }}
         />
         <Controls
+          controlsComponent={this.props.controlsComponent}
           ref={(ref) => { this.controls = ref }}
           toggleMute={() => this.toggleMute()}
           toggleFS={() => this.toggleFS()}

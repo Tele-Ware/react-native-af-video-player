@@ -4,7 +4,8 @@ import {
   View,
   Animated,
   StyleSheet,
-  TouchableWithoutFeedback as Touchable
+  TouchableWithoutFeedback as Touchable,
+  Text
 } from 'react-native'
 import {
   PlayButton,
@@ -131,40 +132,46 @@ class Controls extends Component {
     } = this.props
 
     const { center, ...controlBar } = theme
-
+    let ControlsComponent = this.props.controlsComponent
     return (
       <Touchable onPress={() => this.hideControls()}>
         <Animated.View style={[styles.container, { opacity: this.animControls }]}>
-          <TopBar
-            title={title}
-            logo={logo}
-            more={more}
-            onMorePress={() => onMorePress()}
-            theme={{ title: theme.title, more: theme.more }}
-          />
-          <Animated.View style={[styles.flex, { transform: [{ scale: this.scale }] }]}>
-            <PlayButton
-              onPress={() => this.props.togglePlay()}
-              paused={paused}
-              loading={loading}
-              theme={center}
-            />
-          </Animated.View>
-          <ControlBar
-            toggleFS={() => this.props.toggleFS()}
-            toggleMute={() => this.props.toggleMute()}
-            togglePlay={() => this.props.togglePlay()}
-            muted={muted}
-            paused={paused}
-            fullscreen={fullscreen}
-            onSeek={pos => this.onSeek(pos)}
-            onSeekRelease={pos => this.onSeekRelease(pos)}
-            progress={progress}
-            currentTime={currentTime}
-            duration={duration}
-            theme={controlBar}
-            inlineOnly={inlineOnly}
-          />
+          {this.props.controlsComponent() ?
+            <ControlsComponent />
+            :
+            <>
+              <TopBar
+                title={title}
+                logo={logo}
+                more={more}
+                onMorePress={() => onMorePress()}
+                theme={{ title: theme.title, more: theme.more }}
+              />
+              <Animated.View style={[styles.flex, { transform: [{ scale: this.scale }] }]}>
+                <PlayButton
+                  onPress={() => this.props.togglePlay()}
+                  paused={paused}
+                  loading={loading}
+                  theme={center}
+                />
+              </Animated.View>
+              <ControlBar
+                toggleFS={() => this.props.toggleFS()}
+                toggleMute={() => this.props.toggleMute()}
+                togglePlay={() => this.props.togglePlay()}
+                muted={muted}
+                paused={paused}
+                fullscreen={fullscreen}
+                onSeek={pos => this.onSeek(pos)}
+                onSeekRelease={pos => this.onSeekRelease(pos)}
+                progress={progress}
+                currentTime={currentTime}
+                duration={duration}
+                theme={controlBar}
+                inlineOnly={inlineOnly}
+              />
+            </>
+          }
         </Animated.View>
       </Touchable>
     )
