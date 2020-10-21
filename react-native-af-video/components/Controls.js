@@ -91,18 +91,21 @@ class Controls extends Component {
   hideControls() {
     Animated.parallel([
       Animated.timing(this.animControls, { toValue: 0, duration: 200 }),
-      Animated.timing(this.scale, { toValue: 0.25, duration: 200 })
+      Animated.timing(this.scale, { toValue: 1, duration: 200 })
     ]).start(() => this.setState({ hideControls: true, seconds: 0 }))
   }
 
   hiddenControls() {
     Animated.timing(this.progressbar, { toValue: 0, duration: 200 }).start()
     return (
-      <Touchable style={styles.container} onPress={() => this.showControls()}>
-        <Animated.View style={[styles.container, { paddingBottom: this.progressbar }]}>
-          <ProgressBar theme={this.props.theme.progress} progress={this.props.progress} />
-        </Animated.View>
-      </Touchable>
+      !!this.props.hideControls ?
+        <Touchable style={styles.container} onPress={() => this.showControls()}>
+          <Animated.View style={[styles.container, { paddingBottom: this.progressbar }]}>
+            <ProgressBar theme={this.props.theme.progress} progress={this.props.progress} />
+          </Animated.View>
+        </Touchable>
+        :
+        <View />
     )
   }
 
@@ -132,46 +135,47 @@ class Controls extends Component {
     } = this.props
 
     const { center, ...controlBar } = theme
-    let ControlsComponent = this.props.controlsComponent
+    let ControlsComponent = this.props.controlsComponent ? this.props.controlsComponent : () => <View />
     return (
       <Touchable onPress={() => this.hideControls()}>
         <Animated.View style={[styles.container, { opacity: this.animControls }]}>
-          {this.props.controlsComponent() ?
+
+          <>
+            {/* <TopBar
+              title={title}
+              logo={logo}
+              more={more}
+              onMorePress={() => onMorePress()}
+              theme={{ title: theme.title, more: theme.more }}
+            /> */}
             <ControlsComponent />
-            :
-            <>
-              <TopBar
-                title={title}
-                logo={logo}
-                more={more}
-                onMorePress={() => onMorePress()}
-                theme={{ title: theme.title, more: theme.more }}
-              />
-              <Animated.View style={[styles.flex, { transform: [{ scale: this.scale }] }]}>
-                <PlayButton
-                  onPress={() => this.props.togglePlay()}
-                  paused={paused}
-                  loading={loading}
-                  theme={center}
-                />
-              </Animated.View>
-              <ControlBar
-                toggleFS={() => this.props.toggleFS()}
-                toggleMute={() => this.props.toggleMute()}
-                togglePlay={() => this.props.togglePlay()}
-                muted={muted}
+            {!!this.props.hideControls && <Animated.View style={[styles.flex, { transform: [{ scale: this.scale }], }]}>
+              <PlayButton
+                controlsComponent={!!this.props.controlsComponent}
+                onPress={() => this.props.togglePlay()}
                 paused={paused}
-                fullscreen={fullscreen}
-                onSeek={pos => this.onSeek(pos)}
-                onSeekRelease={pos => this.onSeekRelease(pos)}
-                progress={progress}
-                currentTime={currentTime}
-                duration={duration}
-                theme={controlBar}
-                inlineOnly={inlineOnly}
+                loading={loading}
+                theme={center}
               />
-            </>
-          }
+            </Animated.View>}
+            {!!this.props.hideControls && <ControlBar
+              controlsComponent={!!this.props.controlsComponent}
+              toggleFS={() => this.props.toggleFS()}
+              toggleMute={() => this.props.toggleMute()}
+              togglePlay={() => this.props.togglePlay()}
+              muted={muted}
+              paused={paused}
+              fullscreen={fullscreen}
+              onSeek={pos => this.onSeek(pos)}
+              onSeekRelease={pos => this.onSeekRelease(pos)}
+              progress={progress}
+              currentTime={currentTime}
+              duration={duration}
+              theme={controlBar}
+              inlineOnly={inlineOnly}
+            />}
+          </>
+
         </Animated.View>
       </Touchable>
     )

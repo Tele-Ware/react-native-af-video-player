@@ -14,12 +14,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor,
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 
 const PlayButton = props => (
-  <View style={styles.playContainer}>
+  <View style={[styles.playContainer, !!props.controlsComponent ? { justifyContent: 'flex-end', marginBottom: 20 } : { justifyContent: 'center', flex: 1, }]}>
     <TouchableOpacity
       logEvent={{
         eventName: props.paused ? 'play_video' : 'pause_video',

@@ -410,6 +410,7 @@ class Video extends Component {
         />
         <Controls
           controlsComponent={this.props.controlsComponent}
+          hideControls={this.props.hideControls}
           ref={(ref) => { this.controls = ref }}
           toggleMute={() => this.toggleMute()}
           toggleFS={() => this.toggleFS()}

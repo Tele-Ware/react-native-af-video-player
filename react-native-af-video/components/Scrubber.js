@@ -1,4 +1,4 @@
-import React from 'react' 
+import React from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
@@ -6,20 +6,22 @@ import {
   StyleSheet,
   Slider as RNSlider
 } from 'react-native'
+import { Colors } from '../../../../src/UI'
 // import Slider from 'react-native-slider'
 import Slider from '../../../../node_modules/react-native-slider/src/Slider'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   slider: {
     marginHorizontal: -10
   },
   thumbStyle: {
     width: 15,
-    height: 15
+    height: 30
   },
   trackStyle: {
     borderRadius: 1
@@ -31,19 +33,20 @@ const Scrubber = (props) => {
   const { progress, theme, onSeek, onSeekRelease } = props
   return (
     <View style={styles.container}>
-      { Platform.OS === 'ios' ?
-        <Slider
-          onValueChange={val => onSeek(val)}
-          onSlidingComplete={val => onSeekRelease(val)}
-          value={progress === Number.POSITIVE_INFINITY ? 0 : progress}
-          thumbTintColor={theme.scrubberThumb}
-          thumbStyle={styles.thumbStyle}
-          trackStyle={styles.trackStyle}
-          minimumTrackTintColor={theme.scrubberBar}
-          maximumTrackTintColor={trackColor}
-          trackClickable
-        />
-      :
+      {/* { Platform.OS === 'ios' ? */}
+      <Slider
+        onValueChange={val => onSeek(val)}
+        onSlidingComplete={val => onSeekRelease(val)}
+        value={progress === Number.POSITIVE_INFINITY ? 0 : progress}
+        thumbTintColor={theme.scrubberThumb}
+        thumbStyle={!props.controlsComponent ? styles.thumbStyle : { width: 15, height: 15 }}
+        trackStyle={[styles.trackStyle, !props.controlsComponent ? { height: 15, borderRadius: 7 } : {}]}
+        minimumTrackTintColor={!props.controlsComponent ? Colors().App.Primary : theme.scrubberBar}
+        maximumTrackTintColor={!props.controlsComponent ? Colors().App.Secondary : trackColor}
+        trackClickable
+        style={!props.controlsComponent ? { width: '85%' } : { width: '100%' }}
+      />
+      {/* :
         <RNSlider
           style={styles.slider}
           onValueChange={val => onSeek(val)}
@@ -53,7 +56,7 @@ const Scrubber = (props) => {
           minimumTrackTintColor={theme.scrubberBar}
           maximumTrackTintColor={trackColor}
         />
-      }
+      } */}
     </View>
   )
 }

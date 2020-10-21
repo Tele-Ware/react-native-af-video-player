@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { ToggleIcon, Time, Scrubber } from './'
 
@@ -27,15 +27,16 @@ const ControlBar = (props) => {
   } = props
 
   return (
-    <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)']} style={[styles.container, { marginBottom: 10 }]}>
-      <Time time={currentTime} theme={theme.seconds} />
+    <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)']} style={[styles.container, { marginBottom: !!props.controlsComponent ? 40 : 10 }]}>
+      {!props.controlsComponent ? <Time time={currentTime} theme={theme.seconds} /> : <View />}
       <Scrubber
+        controlsComponent={!props.controlsComponent}
         onSeek={pos => onSeek(pos)}
         onSeekRelease={pos => onSeekRelease(pos)}
         progress={progress}
         theme={{ scrubberThumb: theme.scrubberThumb, scrubberBar: theme.scrubberBar }}
       />
-      <ToggleIcon
+      {!props.controlsComponent ? <ToggleIcon
         paddingLeft
         theme={theme.volume}
         onPress={() => props.toggleMute()}
@@ -44,8 +45,10 @@ const ControlBar = (props) => {
         iconOn="volume-mute"
         size={20}
       />
-      <Time time={duration} theme={theme.duration} />
-      {!inlineOnly &&
+        :
+        <View />}
+      {!props.controlsComponent ? <Time time={duration} theme={theme.duration} /> : <View />}
+      {!inlineOnly && !props.controlsComponent &&
         <ToggleIcon
           paddingRight
           onPress={() => props.toggleFS()}
