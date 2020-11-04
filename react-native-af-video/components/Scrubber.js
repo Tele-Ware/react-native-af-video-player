@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Slider as RNSlider
 } from 'react-native'
-import { Colors } from '../../../../src/UI'
+import { Colors } from '../../../../src/Constants'
 // import Slider from 'react-native-slider'
 import Slider from '../../../../node_modules/react-native-slider/src/Slider'
 

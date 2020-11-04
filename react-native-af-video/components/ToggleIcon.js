@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
-import { TouchableOpacity } from '../../../../src/components';
+import TouchableOpacity from '../../../../src/components/TouchableOpacity';
 
 const backgroundColor = 'transparent';
 
