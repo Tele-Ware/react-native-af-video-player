@@ -77,6 +77,7 @@ class Video extends Component {
   componentDidMount() {
     Dimensions.addEventListener('change', this.onRotated)
     BackHandler.addEventListener('hardwareBackPress', this.BackHandler)
+    this.setState({ muted: this.props.muted })
   }
 
   componentWillUnmount() {
@@ -436,6 +437,7 @@ class Video extends Component {
   }
 
   render() {
+
     if (this.state.renderError) return this.renderError()
     return this.renderPlayer()
   }
