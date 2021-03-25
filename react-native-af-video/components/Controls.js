@@ -131,7 +131,8 @@ class Controls extends Component {
       currentTime,
       duration,
       theme,
-      inlineOnly
+      inlineOnly,
+      hideFullScreenControl,
     } = this.props
 
     const { center, ...controlBar } = theme
@@ -164,6 +165,7 @@ class Controls extends Component {
               toggleMute={() => this.props.toggleMute()}
               togglePlay={() => this.props.togglePlay()}
               muted={muted}
+              hideFullScreenControl={hideFullScreenControl}
               paused={paused}
               fullscreen={fullscreen}
               onSeek={pos => this.onSeek(pos)}
