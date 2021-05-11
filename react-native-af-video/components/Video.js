@@ -85,6 +85,19 @@ class Video extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.BackHandler)
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    this.setState({ fullScreen: nextProps.fullscreen })
+    if (this.state.fullScreen == false && nextProps.fullscreen == true) {
+      console.log(1)
+      this.toggleFS()
+    }
+    else if (this.state.fullScreen == true && nextProps.fullscreen == false) {
+      console.log(2)
+      this.toggleFS()
+    }
+  }
+
   onLoadStart() {
     this.setState({ paused: true, loading: true })
   }
@@ -245,19 +258,25 @@ class Video extends Component {
         if (this.state.fullScreen) {
           const initialOrient = Orientation.getInitialOrientation()
           const height = this.props.fullscreenHeight || Dimensions.get('window').height
-          this.props.onFullScreen(this.state.fullScreen)
           if (this.props.rotateToFullScreen) Orientation.lockToPortrait()
+          // setTimeout(() => {
           this.animToFullscreen(height)
+
+          // }, 1000);
+          // this.props.onFullScreen(this.state.fullScreen)
         } else {
           if (this.props.fullScreenOnly) {
             this.setState({ paused: true }, () => this.props.onPlay(!this.state.paused))
           }
-          this.props.onFullScreen(this.state.fullScreen)
           if (this.props.rotateToFullScreen) Orientation.lockToPortrait()
+          // setTimeout(() => {
           this.animToInline()
-          setTimeout(() => {
-            if (!this.props.lockPortraitOnFsExit) Orientation.lockToPortrait()
-          }, 1500)
+
+          // }, 1000);
+          // this.props.onFullScreen(this.state.fullScreen)
+          // setTimeout(() => {
+          //   if (!this.props.lockPortraitOnFsExit) Orientation.lockToPortrait()
+          // }, 1500)
         }
       })
     })
@@ -415,7 +434,7 @@ class Video extends Component {
           hideControls={this.props.hideControls}
           ref={(ref) => { this.controls = ref }}
           toggleMute={() => this.toggleMute()}
-          toggleFS={() => this.toggleFS()}
+          toggleFS={() => this.props.onFullScreen()}
           togglePlay={() => this.togglePlay()}
           paused={paused}
           muted={muted}
@@ -438,7 +457,7 @@ class Video extends Component {
   }
 
   render() {
-
+    console.log(this.props.fullscreen)
     if (this.state.renderError) return this.renderError()
     return this.renderPlayer()
   }
